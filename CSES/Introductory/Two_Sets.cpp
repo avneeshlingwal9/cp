@@ -14,7 +14,7 @@ int main(){
     
     cin >> n; 
 
-    long long sum = (n *1ll * (n + 1))/2; 
+    ll sum = (n *1ll * (n + 1))/2; 
 
     if(sum & 1){
 
@@ -24,67 +24,54 @@ int main(){
 
     else{
 
-        vector<bool> taken(n + 1 , false); 
+        sum /= 2; 
 
-        long long toFind = sum/2; 
+        vector<int> set1, set2; 
 
-        int count = 0; 
+        for(int i = n ;  i >= 1; i--){
 
-        ll sum_1 = 0;
+            if(sum >= i){
 
-        ll max_e = n ; 
-
-        while(sum_1 < toFind){
-
-            ll remaining_sum = toFind - sum_1; 
-
-            if(remaining_sum > max_e){
-
-                // Add the maximum element.
-
-                taken[max_e] = true; 
-                sum_1 += max_e; 
-
-                max_e--; 
-
+                set1.push_back(i);
+                sum -= i; 
 
             }
             else{
 
-                taken[remaining_sum] = true;
-                sum_1 = toFind; 
-
+                set2.push_back(i); 
 
             }
-            count++; 
 
         }
 
 
         cout << "YES" << "\n";
 
-        cout << count << "\n";
+        cout << set1.size() << "\n";
 
-        for(int i = 1; i <= n; i++){
-            if(taken[i]){
+        for(auto& x : set1){
 
-                cout << i << " ";
-
-            }
+            cout << x << " ";
         }
-        cout << "\n" << n - count << "\n"; 
 
-        for(int i = 1 ; i <= n ; i++){
+        cout << "\n" << set2.size() << "\n"; 
 
-            if(!taken[i]){
+        for(auto& x: set2){
 
-                cout << i << " "; 
-
-            }
+            cout << x << " "; 
 
         }
+
         cout << "\n"; 
+        
+
 
     }
+
+
+
+
+
+    
     
 }
